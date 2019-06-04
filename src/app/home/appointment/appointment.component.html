@@ -1,0 +1,22 @@
+<h3>Appointments</h3>
+
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Vehicle</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Period</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let appointment of appointmentDetails;let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{appointment.vehicleNumber}}</td>
+        <td>{{appointment.date}}</td>
+        <td>{{appointment.time}}</td>
+        <td>{{appointment.timePeriod}}</td>
+      </tr> 
+    </tbody>
+  </table>

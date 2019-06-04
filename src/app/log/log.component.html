@@ -1,0 +1,134 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 ScrollerDiv">
+        <div>
+              <h3>Service Log</h3>
+              <hr>
+
+              <div *ngFor="let logItem of vehicleLog; let i=index">
+                  <div class="card" style="width: 18rem;" >
+                      <div class="card-body">
+                        <h5 class="card-title">{{logItem.vehicleNumber}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{"Last Date : "+logItem.date}}</h6>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">{{"Amount : Rs."+logItem.totalAmount+"/="}}</li>
+                          <li class="list-group-item">{{"Pre Millage : "+logItem.preMillage+" km"}}</li>
+                          <li class="list-group-item">{{"Next Date : "+logItem.nextDate}}</li>
+                        </ul>
+                        <p></p>
+                        <button class="btn btn-primary" (click)="onViewDetail($event)" id={{i}}>View Detail</button>
+                      </div>
+                  </div>
+
+                  <hr>
+
+              </div>
+
+
+              <!-- <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                  </div>
+              </div> -->
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <h3>Vehicle Details</h3>
+        <hr>
+        <div *ngIf="isViewClicked">
+            <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vehi Number</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{ vehicleLog[itemClicked].vehicleNumber}}</td>
+                    <td>{{ vehicleLog[itemClicked].date}}</td>
+                    <td>{{vehicleLog[itemClicked].totalAmount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Packege Name</th>
+                    <th scope="col">Oil Changed</th>
+                    <th scope="col">Air Filter Changed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{vehicleLog[itemClicked].packageName}}</td>
+                    <td>{{vehicleLog[itemClicked].oilChanged==true?"Yes":"No"}}</td>
+                    <td>{{vehicleLog[itemClicked].airFilterChanged==true?"Yes":"No"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pre Millage</th>
+                    <th scope="col">Next Millage</th>
+                    <th scope="col">Next Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{vehicleLog[itemClicked].preMillage}}</td>
+                    <td>{{vehicleLog[itemClicked].nextMillage}}</td>
+                    <td>{{vehicleLog[itemClicked].nextDate}}</td>
+                  </tr>
+                </tbody>
+            </table>
+
+            <button class="btn btn-warning" (click)="onDoneClicked()">Done</button>
+        </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,20 @@
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Vehicle Number</th>
+      <th scope="col">Change oil on millage</th>
+      <th scope="col">Change oil on date</th>
+      <th scope="col">Last service date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let summery of selectedLogs ; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{summery.vehicleNumber}}</td>
+      <td>{{summery.nextMillage}}</td>
+      <td>{{summery.nextDate}}</td>
+      <td>{{summery.date}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,113 @@
+<div>
+    <h3>Vehicles Registered</h3>
+
+    <ul class="list-group">
+        <li *ngFor="let vehicle of vehicleDetail; let i=index" class="list-group-item d-flex justify-content-between align-items-center">
+          {{vehicle.vehicleNumber}}
+          <span>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="onRemoveClick($event)"
+              id = {{i}}>
+              Remove
+            </button>
+          </span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+                    Add A Vehicle
+                </button>
+                <!-- <button type="button" class="btn btn-primary btn-lg btn-block">Add A Vehicle</button> -->
+            </span>
+        </li>
+      </ul>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Vehicle Registration</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+            </div>
+            <form (ngSubmit)="onSubmitVehicle(formElement)" #formElement="ngForm">
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Vehicle Number</span>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="CAD-1523"
+                      aria-label="Username"
+                      aria-describedby="basic-addon1"
+                      id="vehicleNumber"
+                      ngModel
+                      name="vehicleNumber"
+                      required
+                      #vehicleNumber="ngModel"
+                    >
+                  </div>
+                  <span class="form-text text-muted" id="" *ngIf="!vehicleNumber.valid && vehicleNumber.touched">  * Please enter your vehicle number</span>
+
+                  <div class="modal-body">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="inputGroupSelect02">Type</label>
+                        </div>
+                        <select
+                          class="custom-select"
+                          id="type"
+                          [ngModel]="'Car'"
+                          name="vehicleType"
+                          required
+                          #vehicleTypeControler>
+                            <option value="Car" selected>Car</option>
+                            <option value="Van">Van</option>
+                            <option value="Bus">Bus</option>
+                            <option value="Jeep">Jeep</option>
+                      </select>
+                      </div>
+                  </div>
+
+                  <div class="modal-body">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="inputGroupSelect01">Energy Type</label>
+                        </div>
+                          <select
+                            class="custom-select"
+                            id="energyType"
+                            [ngModel]="'Not Hybrid'"
+                            name="vehiclEnergyType"
+                            required
+                            #vehicleEnergyTypeControler>
+                              <option value="Hybrid">Hybrid</option>
+                              <option value="Not Hybrid">Not Hybrid</option>
+                              <option value="Electric">Electric</option>
+                              <option value="Pluging Hybrid">Pluging Hybrid</option>
+                        </select>
+                      </div>
+                  </div>
+
+                  <div class="modal-footer ">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="!formElement.valid"
+                      >
+                      Submit
+                    </button>
+                  </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+</div>
+
