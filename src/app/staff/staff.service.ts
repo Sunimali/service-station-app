@@ -69,15 +69,15 @@ export class StaffService {
         this.staffUpdated.next([...this.staffMembers]);
       });
   }
-  updateStaff(id: string, name: string, mobile: string, salary: string,rate: string) {
+  updateStaff(id: string, name: string, mobile: string, salary: string,rate: string,free:boolean) {
     const staffMember: StaffMember = { id: id, name: name, mobile: mobile, salary:salary,rate:rate };
     this.http
-      .put("http://localhost:3000/api/posts/" + id, staffMember)
+      .put("http://localhost:3000/api/staff/" + id, staffMember)
       .subscribe(response => {
-        const updatedPosts = [...this.staffMembers];
-        const oldPostIndex = updatedPosts.findIndex(p => p.id === staffMember.id);
-        updatedPosts[oldPostIndex] = staffMember;
-        this.staffMembers = updatedPosts;
+        const updatedStaff = [...this.staffMembers];
+        const oldStaffIndex = updatedStaff.findIndex(p => p.id === staffMember.id);
+        updatedStaff[oldStaffIndex] = staffMember;
+        this.staffMembers = updatedStaff;
         this.staffUpdated.next([...this.staffMembers]);
         this.router.navigate(["/staff"]);
       });

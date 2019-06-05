@@ -1,19 +1,20 @@
 <ul class="list-group" >
-  <li  *ngFor="let staffmem of staffMembers" class="list-group-item d-flex justify-content-between align-items-center">
+  <li  *ngFor="let staffmem of staffMembers; let i=index" class="list-group-item d-flex justify-content-between align-items-center">
     {{staffmem.name}}
     <span>
       <button
         type="button"
         class="btn btn-outline-danger"
-        (click)="onView(staffmem.id)"
+        (click)="onView(i)"
+        data-toggle="modal" 
+        data-target="#viewStaffModal"
         id = {{i}}>
         View
       </button>
       <button
         type="button"
         class="btn btn-outline-danger"
-        data-toggle="modal" 
-        data-target="#viewStaffModal"
+        (click)="onDelete(i)"
         id = {{i}}>
         Remove
       </button>
@@ -21,12 +22,6 @@
   </li>
 </ul>
 <p *ngIf="staffMembers.length == 0"> No staff members added yet!</p>
-
-<span>
-  <button type="button" class="btn btn-primary btn-lg btn-block" >
-      Accept
-  </button>
-</span>
 
 <div class="modal fade" id="viewStaffModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -38,20 +33,21 @@
         </button>
 
       </div>
-      <form  #formElement="ngForm" (ngSubmit)="onUpdateStaff(formElement)">
+      <form #formElements="ngForm" (ngSubmit)="onUpdateStaff(formElements)" >
           <div class="input-group mb-3 ">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Name</span>
+                <span class="input-group-text" id="basic-addon1">name</span>
               </div>
               <input
                 type="text"
                 class="form-control"
                 aria-label="Username"
                 aria-describedby="basic-addon1"
-                id="name"
-                ngModel
-                name="name"
-                #name="ngModel"
+                id="staffname"
+                ngModel = {{selectedStaff?.name}}
+                required
+                name="staffname"
+                #staffname="ngModel"
               >
             </div>
 
@@ -65,7 +61,8 @@
                 aria-label="Username"
                 aria-describedby="basic-addon1"
                 id="mobile"
-                ngModel
+                ngModel = {{selectedStaff?.mobile}}
+                required
                 name="mobile"
                 #mobile="ngModel"
               >
@@ -81,9 +78,9 @@
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   id="salary"
-                  ngModel
+                  ngModel = {{selectedStaff?.salary}}
+                  required
                   name="salary"
-                  value={{}}
                   #salary="ngModel"
                 >
               </div>
@@ -98,7 +95,7 @@
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     id="rating"
-                    ngModel
+                    ngModel={{selectedStaff?.rate}}
                     name="rating"
                     disabled
                     #rating="ngModel"

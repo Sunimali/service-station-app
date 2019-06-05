@@ -29,7 +29,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, DELETE, OPTIONS"
+    "GET, POST, PATCH, DELETE, PUT, OPTIONS"
   );
   next();
 });
@@ -48,6 +48,20 @@ app.post("/api/staff", (req, res, next) => {
     });
   });
   console.log(staff.name);
+});
+
+app.put("/api/staff/:id", (req, res, next) => {
+  const staff = new Staff({
+    _id: req.body.id,
+    name: req.body.name,
+    mobile: req.body.mobile,
+    salary: req.body.salary,
+    rate: req.body.rate,
+    free: req.body.free
+  });
+  Staff.updateOne({ _id: req.params.id }, staff).then(result => {
+    res.status(200).json({ message: "Update successful!" });
+  });
 });
 
 app.get("/api/staff", (req, res, next) => {
