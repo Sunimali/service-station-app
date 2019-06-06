@@ -83,6 +83,14 @@ app.delete("/api/staff/:id", (req, res, next) => {
   });
 });
 
+app.delete("/api/appointment/:id", (req, res, next) => {
+  console.log(req.params.id);
+  Appointment.deleteOne({ _id: req.params.id }).then(result => {
+    console.log(req.params.id);
+    res.status(200).json({ message: "appointment is declined!" });
+  });
+});
+
 app.get("/api/appointment", (req, res, next) => {
   console.log("appointment");
   Appointment.find().then(documents => {

@@ -74,7 +74,7 @@ export class VehicleAppointmentComponent implements OnInit {
   }
 
   onDelete(staffId: string) {
-    this.vehicleAppointmentService.deleteStaff(staffId);
+    this.vehicleAppointmentService.declineAppointment(staffId);
   }
 
   onView(staffId: string) {

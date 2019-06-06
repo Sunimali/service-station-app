@@ -53,13 +53,16 @@ export class VehicleAppointmentService {
     );
   }
 
-  deleteStaff(appId: string) {
-    this.http.delete("http://localhost:3000/api/staff/" + appId)
+  declineAppointment(appId: string) {
+    const id = this.appointments[appId].id;
+    console.log(id);
+    this.http.delete("http://localhost:3000/api/appointment/" + id)
       .subscribe(() => {
-        const updatedAppointment = this.appointments.filter(staff => staff.id !== appId);
+        const updatedAppointment = this.appointments.filter(app => app.id !== id);
         this.appointments = updatedAppointment;
         this.appointmentUpdated.next([...this.appointments]);
       });
+      this.router.navigate(["/appointment"]);
   }
   acceptAppointment(id: string, owner: string, vehicle: string, date: Date,time: string, packg:string,staffid:string,accpted:boolean) {
     const appointment: Appointment = { id: id, owner: owner, vehicle: vehicle, date:date,time:time ,package:packg,staffid:staffid,accepted:true};
