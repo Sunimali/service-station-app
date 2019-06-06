@@ -7,7 +7,7 @@
           <li *ngFor="let appointmentItem of pendingApppointments;let i = index" class="list-group-item d-flex justify-content-between align-items-center">
               <div class="card" style="width: 18rem;" >
                   <div class="card-body">
-                    <h5 class="card-title">{{appointmentItem.vehicle}}</h5>
+                    <h5 class="card-title">{{appointmentItem.vehicle}} {{appointmentItem.owner}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{"Date : "+appointmentItem.date}}</h6>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">{{"Time : "+appointmentItem.time}}</li>
@@ -60,11 +60,11 @@
                           class="form-control"
                           aria-label="Username"
                           aria-describedby="basic-addon1"
-                          id="customer"
+                          id="owner"
                           ngModel={{pendiingSelectedAppointment?.owner}}
-                          name="customer"
+                          name="owner"
                           disabled
-                          #customer="ngModel"
+                          #owner="ngModel"
                         >
                       </div>
 

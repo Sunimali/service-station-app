@@ -63,9 +63,10 @@ export class StaffService {
   }
 
   deleteStaff(staffId: string) {
-    this.http.delete("http://localhost:3000/api/staff/" + staffId)
+    const id = this.staffMembers[staffId].id;
+    this.http.delete("http://localhost:3000/api/staff/" + id)
       .subscribe(() => {
-        const updatedStaff = this.staffMembers.filter(staff => staff.id !== staffId);
+        const updatedStaff = this.staffMembers.filter(staff => staff.id !== id);
         this.staffMembers = updatedStaff;
         this.staffUpdated.next([...this.staffMembers]);
       });

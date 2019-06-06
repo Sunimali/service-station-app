@@ -22,10 +22,7 @@ export class VehicleAppointmentComponent implements OnInit {
   isViewClicked: boolean = false;
   itemClicked:number;
 
-  constructor(private vehicleAppointmentService:VehicleAppointmentService,private staffService:StaffService) {
-   // this.vehicleLog = vehicleAppointmentService.getLogItems();
-  //  this.vehicleLog = this.vehicleLog.reverse();
-  }
+  constructor(private vehicleAppointmentService:VehicleAppointmentService,private staffService:StaffService) {}
 
   ngOnInit() {
 
@@ -33,7 +30,6 @@ export class VehicleAppointmentComponent implements OnInit {
     this.postsSub = this.staffService.getStaffUpdateListener()
       .subscribe((staffMembers: StaffMember[]) => {
         this.staffMembers = staffMembers;
-        console.log(this.staffMembers);
       });
 
      
@@ -55,12 +51,14 @@ export class VehicleAppointmentComponent implements OnInit {
       else{
         this.pendingApppointments.push(appt);
       }
-
+      
     });
 
   }
   onViewDetailForAccept(i:number){
     this.pendingSelectedAppointment = this.pendingApppointments[i];
+    console.log(this.pendingApppointments[0].owner);
+
   }
 
   onAcceptAppointment(form: NgForm){
