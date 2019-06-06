@@ -20,13 +20,14 @@ export class StaffService {
         "http://localhost:3000/api/staff"
       )
       .pipe(map((staffData) => {
-        console.log(staffData);
+        console.log(staffData+"sun");
         return staffData.staff.map(staffMember => {
           return {
             name: staffMember.name,
             mobile: staffMember.mobile,
             salary: staffMember.salary,
             rate: staffMember.rate,
+            free:staffMember.free,
             id: staffMember._id
           };
         });
@@ -42,7 +43,7 @@ export class StaffService {
   }
 
   addStaff(name: string, mobile: string,salary:string,rate:string,free:boolean) {
-    const staffMember: StaffMember = { id: null, name: name, mobile: mobile, salary:salary,rate:rate };
+    const staffMember: StaffMember = { id: null, name: name, mobile: mobile, salary:salary,rate:rate,free:free };
     console.log(staffMember);
     this.http
       .post<{ message: string, staffId: string }>("http://localhost:3000/api/staff", staffMember)
@@ -70,7 +71,7 @@ export class StaffService {
       });
   }
   updateStaff(id: string, name: string, mobile: string, salary: string,rate: string,free:boolean) {
-    const staffMember: StaffMember = { id: id, name: name, mobile: mobile, salary:salary,rate:rate };
+    const staffMember: StaffMember = { id: id, name: name, mobile: mobile, salary:salary,rate:rate,free:free };
     this.http
       .put("http://localhost:3000/api/staff/" + id, staffMember)
       .subscribe(response => {

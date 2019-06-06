@@ -23,7 +23,9 @@ export class StaffListComponent implements OnInit, OnDestroy {
     this.postsSub = this.staffService.getStaffUpdateListener()
       .subscribe((staffMembers: StaffMember[]) => {
         this.staffMembers = staffMembers;
+        console.log(this.staffMembers);
       });
+      
     this.selectedStaff = this.staffMembers[0]
   }
 

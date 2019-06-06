@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const Staff = require("./models/staff");
+const Appointment = require("./models/appointment");
 
 const app = express();
 
@@ -39,7 +40,8 @@ app.post("/api/staff", (req, res, next) => {
     name: req.body.name,
     mobile: req.body.mobile,
     salary: req.body.salary,
-    rate: req.body.rate
+    rate: req.body.rate,
+    free:req.body.free
   });
   staff.save().then(createdStaff => {
     res.status(201).json({
@@ -74,10 +76,21 @@ app.get("/api/staff", (req, res, next) => {
 });
 
 app.delete("/api/staff/:id", (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id }).then(result => {
+  Staff.deleteOne({ _id: req.params.id }).then(result => {
     console.log(result);
     res.status(200).json({ message: "staff member deleted!" });
   });
 });
+
+app.get("/api/appointment", (req, res, next) => {
+  console.log("appointment");
+  Appointment.find().then(documents => {
+    res.status(200).json({
+      message: "appointments fetched successfully!",
+      appointments: documents
+    });
+  });
+});
+
 
 module.exports = app;

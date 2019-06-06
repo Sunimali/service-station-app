@@ -4,5 +4,6 @@ export interface StaffMember {
   mobile: string;
   salary: string;
   rate: string;
+  free:boolean;
 
 }

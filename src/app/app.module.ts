@@ -10,7 +10,6 @@ import { SummeryComponent } from './home/summery/summery.component';
 import { VehicleComponent } from './home/vehicle/vehicle.component';
 import { AppointmentComponent } from './home/appointment/appointment.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { VehicleAppointmentComponent } from './vehicle-appointment/vehicle-appointment.component';
 import { LogComponent } from './log/log.component';
 
 import { CustomerService } from "./service/customer.service";
@@ -23,6 +22,9 @@ import { StaffListComponent } from './staff/staff-list/staff-list.component';
 import { StaffCreateComponent } from './staff/staff-create/staff-create.component';
 import { StaffComponent } from './staff/staff.component';
 import { StaffService } from './staff/staff.service';
+
+import { VehicleAppointmentComponent } from './vehicle-appointment/vehicle-appointment.component';
+import{VehicleAppointmentService}from './vehicle-appointment/vehicle-appointment.service';
 
 
 const appRoutes: Routes = [
@@ -59,6 +61,7 @@ const appRoutes: Routes = [
     LogService,
     StaffService,
     VehicleService,
+    VehicleAppointmentService,
     NavBar
   ],
   bootstrap: [AppComponent]

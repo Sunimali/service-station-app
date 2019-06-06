@@ -1,8 +1,11 @@
 export interface Appointment {
   id: string;
-  name: string;
-  mobile: string;
-  salary: string;
-  rate: string;
+  owner: string;
+  vehicle: string;
+  date: Date;
+  time: string;
+  package:string;
+  staffid:string;
+  accepted:boolean;
 
 }

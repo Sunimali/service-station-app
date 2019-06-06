@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Appointment } from "./appointment.model";
 import { Router } from '@angular/router';
+import { StaffService } from '../staff/staff.service';
 
 
 @Injectable({ providedIn: "root" })
@@ -12,20 +13,23 @@ export class VehicleAppointmentService {
   private appointments: Appointment[] = [];
   private appointmentUpdated = new Subject<Appointment[]>();
 
-  constructor(private http: HttpClient ,private router: Router) {}
+  constructor(private http: HttpClient ,private router: Router,private staffService:StaffService) {}
 
-  getStaff() {
+  getAppointments() {
+    
     this.http
       .get<{ message: string; appointments: any }>(
-        "http://localhost:3000/api/appointments"
+        "http://localhost:3000/api/appointment"
       )
       .pipe(map((AppointmentData) => {
         return AppointmentData.appointments.map(appointment => {
           return {
-            name: appointment.name,
-            mobile: appointment.mobile,
-            salary: appointment.salary,
-            rate: appointment.rate,
+            owner: appointment.owner,
+            vehicle: appointment.vehicle,
+            date: appointment.date,
+            time: appointment.time,
+            package: appointment.packg,
+            staffid: appointment.staffid,
             id: appointment._id
           };
         });
@@ -34,29 +38,18 @@ export class VehicleAppointmentService {
         this.appointments = transformedApp;
         this.appointmentUpdated.next([...this.appointments]);
       });
+      
   }
 
-  getStaffUpdateListener() {
+  getAppointmentUpdateListener() {
     return this.appointmentUpdated.asObservable();
   }
 
-  addStaff(name: string, mobile: string,salary:string,rate:string,free:boolean) {
-    const appointment: Appointment = { id: null, name: name, mobile: mobile, salary:salary,rate:rate };
-    console.log(appointment);
-    this.http
-      .post<{ message: string, appId: string }>("http://localhost:3000/api/appointments", appointment)
-      .subscribe(responseData => {
-        const id = responseData.appId;
-        console.log("id:"+id);
-        appointment.id = id;
-        this.appointments.push(appointment);
-        this.appointmentUpdated.next([...this.appointments]);
-      });
-  }
+  
 
   getappointment(appId: string) {
-    return this.http.get<{ _id: string; name: string; mobile: string; salary: string;rate: string}>(
-      "http://localhost:3000/api/appId/" + appId
+    return this.http.get<{ _id: string; name: string; mobile: string; date: string;time: string}>(
+      "http://localhost:3000/api/appointment/" + appId
     );
   }
 
@@ -68,17 +61,17 @@ export class VehicleAppointmentService {
         this.appointmentUpdated.next([...this.appointments]);
       });
   }
-  updateStaff(id: string, name: string, mobile: string, salary: string,rate: string) {
-    const appointment: Appointment = { id: id, name: name, mobile: mobile, salary:salary,rate:rate };
+  acceptAppointment(id: string, owner: string, vehicle: string, date: Date,time: string, packg:string,staffid:string,accpted:boolean) {
+    const appointment: Appointment = { id: id, owner: owner, vehicle: vehicle, date:date,time:time ,package:packg,staffid:staffid,accepted:true};
     this.http
-      .put("http://localhost:3000/api/appointments/" + id, appointment)
+      .put("http://localhost:3000/api/appointment/" + id, appointment)
       .subscribe(response => {
-        const updatedPosts = [...this.appointments];
-        const oldPostIndex = updatedPosts.findIndex(p => p.id === appointment.id);
-        updatedPosts[oldPostIndex] = appointment;
-        this.appointments = updatedPosts;
+        const updatedAppointment = [...this.appointments];
+        const oldAppIndex = updatedAppointment.findIndex(p => p.id === appointment.id);
+        updatedAppointment[oldAppIndex] = appointment;
+        this.appointments = updatedAppointment;
         this.appointmentUpdated.next([...this.appointments]);
-        this.router.navigate(["/staff"]);
+        this.router.navigate(["/appointment"]);
       });
   }
 }
