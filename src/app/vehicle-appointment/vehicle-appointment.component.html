@@ -1,432 +1,545 @@
 <div class="container-fluid ">
-    <div class="row">
-   <div class=" col-lg-6 ScrollerDivScrollerDiv">
+  <div class="row">
+    <div class=" col-lg-6 ScrollerDivScrollerDiv">
       <h3>Appointment Requests</h3>
-       <hr>
-       <ul class="list-group">
-          <li *ngFor="let appointmentItem of pendingApppointments;let i = index" class="list-group-item d-flex justify-content-between align-items-center">
-              <div class="card" style="width: 18rem;" >
-                  <div class="card-body">
-                    <h5 class="card-title">{{appointmentItem.vehicle}} {{appointmentItem.owner}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{"Date : "+appointmentItem.date}}</h6>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">{{"Time : "+appointmentItem.time}}</li>
-                      <li class="list-group-item">{{"Package : "+appointmentItem.package}}</li>
-                    </ul>
-                    <p></p>
-                 </div>
-              </div>
-              <span>
-                  <button type="button" 
-                          class="btn btn-primary btn-lg btn-block" 
-                          id = {{i}}
-                          (click)="onViewDetailForAccept(i)"
-                          data-toggle="modal" 
-                          data-target="#acceptModal">
-                      Accept
-                  </button>
-              </span>
-              <span>
-                  <button type="button" 
-                          class="btn btn-primary btn-lg btn-block" 
-                          id = {{i}}
-                          (click)="onDelete(i)"
-                          >
-                      Decline
-                  </button>
-              </span>
-    
-          </li>
-        </ul>
-
-
-        <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Appointment Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-    
-                </div>
-                <form (ngSubmit)="onAcceptAppointment(formElement)" #formElement="ngForm">
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Customer</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="owner"
-                          ngModel={{pendiingSelectedAppointment?.owner}}
-                          name="owner"
-                          disabled
-                          #owner="ngModel"
-                        >
-                      </div>
-
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Vehicle Number</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="vehicle"
-                          ngModel={{pendingSelectedAppointment?.vehicle}}
-                          name="vehicle"
-                          disabled
-                          #vehicle="ngModel"
-                        >
-                      </div>
-
-                      <div class="input-group mb-3 ">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Package</span>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            id="package"
-                            ngModel= {{pendingSelectedAppointment?.package}}
-                            name="package"
-                            disabled
-                            #package="ngModel"
-                          >
-                        </div>
-
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1">Date</span>
-                            </div>
-                            <input
-                              type="text"
-                              class="form-control"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              id="date"
-                              ngModel= {{pendingSelectedAppointment?.date}}
-                              name="date"
-                              disabled
-                              #date="ngModel"
-                            >
-                          </div>
-
-                          <div class="input-group mb-3 ">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Time</span>
-                              </div>
-                              <input
-                                type="text"
-                                class="form-control"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                                id="time"
-                                ngModel={{pendingSelectedAppointment?.time}}
-                                name="time"
-                                disabled
-                                #time="ngModel"
-                              >
-                            </div>                      
-    
-                      <div class="modal-body">
-                          <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                              <label class="input-group-text" for="inputGroupSelect01">add Staff</label>
-                            </div>
-                              <select
-                                class="custom-select"
-                                id="staffAssinged"
-                                [ngModel]
-                                name="staffAssinged"
-                                required
-                                #staffAssinged>
-                                <ng-container  *ngFor="let staffmem of staffMembers">
-                                  <option *ngIf="staffmem.free" value={{staffmem.name}}>{{staffmem.name}}</option>
-                                </ng-container>
-                                 
-                            </select>
-                          </div>
-                      </div>
-    
-                      <div class="modal-footer ">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button
-                          type="submit"
-                          class="btn btn-primary"
-                          >
-                          Submit
-                        </button>
-                      </div>
-                </form>
-    
-              </div>
+      <hr />
+      <ul class="list-group">
+        <li
+          *ngFor="let appointmentItem of pendingApppointments; let i = index"
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+                {{ appointmentItem.vehicle }} {{ appointmentItem.owner }}
+              </h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                {{ "Date : " + appointmentItem.date }}
+              </h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ "Time : " + appointmentItem.time }}
+                </li>
+                <li class="list-group-item">
+                  {{ "Package : " + appointmentItem.package }}
+                </li>
+              </ul>
+              <p></p>
             </div>
           </div>
+          <span>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              id="{{ i }}"
+              (click)="onViewDetailForAccept(i)"
+              data-toggle="modal"
+              data-target="#acceptModal"
+            >
+              Accept
+            </button>
+          </span>
+          <span>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              
+              (click)="onDelete(i)"
+            >
+              Decline
+            </button>
+          </span>
+        </li>
+      </ul>
+
+      <div
+        class="modal fade"
+        id="acceptModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Appointment Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form
+              (ngSubmit)="onAcceptAppointment(formElement)"
+              #formElement="ngForm"
+            >
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Customer</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="owner"
+                  ngModel="{{ pendingSelectedAppointment?.owner }}"
+                  name="owner"
+                  disabled
+                  #owner="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Vehicle Number</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="vehicle"
+                  ngModel="{{ pendingSelectedAppointment?.vehicle }}"
+                  name="vehicle"
+                  disabled
+                  #vehicle="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Package</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="package"
+                  ngModel="{{ pendingSelectedAppointment?.package }}"
+                  name="package"
+                  disabled
+                  #package="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Date</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="date"
+                  ngModel="{{ pendingSelectedAppointment?.date }}"
+                  name="date"
+                  disabled
+                  #date="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Time</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="time"
+                  ngModel="{{ pendingSelectedAppointment?.time }}"
+                  name="time"
+                  disabled
+                  #time="ngModel"
+                />
+              </div>
+
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01"
+                      >add Staff</label
+                    >
+                  </div>
+                  <select
+                    class="custom-select"
+                    id="staffAssinged"
+                    [ngModel]
+                    name="staffAssinged"
+                    (ngModelChange)="staffSelected($event)"
+                    required
+                    #staffid
+                  >
+                    <ng-container *ngFor="let staffmem of staffMembers">
+                      <option
+                        *ngIf="staffmem.free"
+                        [value]=" staffmem?.id"
+                        >{{ staffmem.name }}</option
+                      >
+                    </ng-container>
+                  </select>
+                </div>
+              </div> 
+
+              <div class="modal-footer ">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-lg-6 ScrollerDiv ScrollerDiv">
       <h3>UpcomingAppointments</h3>
-       <hr>
-       <ul class="list-group">
-          <li *ngFor="let appointmentItem of acceptedAppointments" class="list-group-item d-flex justify-content-between align-items-center">
-              <div class="card" style="width: 18rem;" >
-                  <div class="card-body">
-                    <h5 class="card-title">{{appointmentItem.vehicle}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{"Date : "+appointmentItem.date}}</h6>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">{{"Time : "+appointmentItem.time}}</li>
-                      <li class="list-group-item">{{"Package : "+appointmentItem.package}}</li>
-                    </ul>
-                    <p></p>
-               </div>
-              </div>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span>
-                  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#viewModal">
-                      View
-                  </button>
-              </span>
-              <span>
-                  <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#paymentModal">
-                      Payment
-                  </button>
-              </span>
-          </li>
-        </ul>
-
-        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Appointment Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-    
-                </div>
-                <form (ngSubmit)="onSubmitVehicle(formElement)" #formElement="ngForm">
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Customer</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="customer"
-                          ngModel
-                          name="customer"
-                          disabled
-                          #customer="ngModel"
-                        >
-                      </div>
-
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Vehicle Number</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="vehicle"
-                          ngModel
-                          name="vehicle"
-                          disabled
-                          #vehicle="ngModel"
-                        >
-                      </div>
-
-                      <div class="input-group mb-3 ">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Package</span>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            id="package"
-                            ngModel
-                            name="package"
-                            disabled
-                            #package="ngModel"
-                          >
-                        </div>
-
-                        <div class="input-group mb-3 ">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text" id="basic-addon1">Date</span>
-                            </div>
-                            <input
-                              type="text"
-                              class="form-control"
-                              aria-label="Username"
-                              aria-describedby="basic-addon1"
-                              id="date"
-                              ngModel
-                              name="date"
-                              disabled
-                              #date="ngModel"
-                            >
-                          </div>
-
-                          <div class="input-group mb-3 ">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Time</span>
-                              </div>
-                              <input
-                                type="text"
-                                class="form-control"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                                id="time"
-                                ngModel
-                                name="time"
-                                disabled
-                                #time="ngModel"
-                              >
-                            </div> 
-                            
-                            <div class="input-group mb-3 ">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1">Staff Assinged</span>
-                                </div>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  aria-label="Username"
-                                  aria-describedby="basic-addon1"
-                                  id="staffAssinged"
-                                  ngModel
-                                  name="staffAssinged"
-                                  disabled
-                                  #staffAssinged="ngModel"
-                                >
-                              </div>
-        
-                      <div class="modal-footer ">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button
-                          type="submit"
-                          class="btn btn-primary"
-                          >
-                          Ok
-                        </button>
-                      </div>
-                </form>
-    
-              </div>
+      <hr />
+      <ul class="list-group">
+        <li
+          *ngFor="let appointmentItem of acceptedAppointments;let i = index"
+          class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ appointmentItem.vehicle }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">
+                {{ "Date : " + appointmentItem.date }}
+              </h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  {{ "Time : " + appointmentItem.time }}
+                </li>
+                <li class="list-group-item">
+                  {{ "Package : " + appointmentItem.package }}
+                </li>
+              </ul>
+              <p></p>
             </div>
           </div>
+          <span>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              data-toggle="modal"
+              data-target="#viewModal"
+              id="{{ i }}"
+              (click)="onViewDetailForAccepted(i)"
+            >
+              View
+            </button>
+          </span>
+          <span>
+            <button
+              type="button"
+              class="btn btn-primary btn-lg btn-block"
+              data-toggle="modal"
+              data-target="#paymentModal"
+              (click)="onViewDetailForAccept(i)"
+            >
+              Payment
+            </button>
+          </span>
+        </li>
+      </ul>
 
-        <div class="modal fade" id="acceptModal" tabindex="-1" role="dialog" aria-labelledby="paymentsModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Payment Details</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-    
-                </div>
-                <form (ngSubmit)="onSubmitVehicle(formElement)" #formElement="ngForm">
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">oil charges</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="oil"
-                          ngModel
-                          name="oil"
-                          required
-                          #oil="ngModel"
-                        >
-                      </div>
-
-                    <div class="input-group mb-3 ">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="basic-addon1">Air filering</span>
-                        </div>
-                        <input
-                          type="text"
-                          class="form-control"
-                          aria-label="Username"
-                          aria-describedby="basic-addon1"
-                          id="airFilter"
-                          ngModel
-                          name="airFilter"
-                          required
-                          #airFilter="ngModel"
-                        >
-                      </div>
-
-                      <div class="input-group mb-3 ">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">Additional Charges</span>
-                          </div>
-                          <input
-                            type="text"
-                            class="form-control"
-                            aria-label="Username"
-                            aria-describedby="basic-addon1"
-                            id="additional"
-                            ngModel
-                            name="additional"
-                            disabled
-                            #additional="ngModel"
-                          >
-                        </div>
-
-                        <div class="modal-body">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Package Charges</label>
-                              </div>
-                                <select
-                                  class="custom-select"
-                                  id="staffAssinged"
-                                  [ngModel]="'Not Hybrid'"
-                                  name="packageAssinged"
-                                  required
-                                  #packageAssinged>
-                                    <option *ngFor="let packageItem of packages" value={{packageItem.name}}>{{packageItem.name}}</option>
-                              </select>
-                            </div>
-                        </div>
-    
-                      <div class="modal-footer ">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button
-                          type="submit"
-                          class="btn btn-primary"
-                          >
-                          Submit
-                        </button>
-                      </div>
-                </form>
-    
-              </div>
+      <div
+        class="modal fade"
+        id="viewModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Appointment Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <form
+              #formElement="ngForm"
+            >
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Customer</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="customer"
+                  ngModel="{{acceptedSelectedAppointment?.owner}}"
+                  name="customer"
+                  disabled
+                  #customer="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Vehicle Number</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="vehicle"
+                  ngModel="{{acceptedSelectedAppointment?.vehicle}}"
+                  name="vehicle"
+                  disabled
+                  #vehicle="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Package</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="package"
+                  ngModel="{{acceptedSelectedAppointment?.package}}"
+                  name="package"
+                  disabled
+                  #package="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Date</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="date"
+                  ngModel="{{acceptedSelectedAppointment?.date}}"
+                  name="date"
+                  disabled
+                  #date="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Time</span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="time"
+                  ngModel="{{acceptedSelectedAppointment?.time}}"
+                  name="time"
+                  disabled
+                  #time="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Staff Assinged</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="staffAssinged"
+                  ngModel="{{selectedStaff?.name}}"
+                  name="staffAssinged"
+                  disabled
+                  #staffAssinged="ngModel"
+                />
+              </div>
+
+              <div class="modal-footer ">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
           </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="paymentModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="paymentsModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Payment Details
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form
+              (ngSubmit)="onDoPayment(formElement)"
+              #formElement="ngForm"
+            >
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >oil charges</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="oil"
+                  ngModel
+                  name="oil"
+                  required
+                  #oil="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Air filering</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="airFilter"
+                  ngModel
+                  name="airFilter"
+                  required
+                  #airFilter="ngModel"
+                />
+              </div>
+
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    >Additional Charges</span
+                  >
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  id="additional"
+                  ngModel
+                  name="additional"
+                  disabled
+                  #additional="ngModel"
+                />
+              </div>
+
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01"
+                      >Package Charges</label
+                    >
+                  </div>
+                  <select
+                    class="custom-select"
+                    id="staffAssinged"
+                    [ngModel]="'Not Hybrid'"
+                    name="packageAssinged"
+                    required
+                    #packageAssinged
+                  >
+                    <option
+                      *ngFor="let packageItem of packages"
+                      value="{{ packageItem.name }}"
+                      >{{ packageItem.name }}</option
+                    >
+                  </select>
+                </div>
+              </div>
+
+              <div class="modal-footer ">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
-
-
-    
-   

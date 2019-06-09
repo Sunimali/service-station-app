@@ -2,7 +2,7 @@ export interface Appointment {
   id: string;
   owner: string;
   vehicle: string;
-  date: Date;
+  date: string;
   time: string;
   package:string;
   staffid:string;

@@ -52,6 +52,21 @@ app.post("/api/staff", (req, res, next) => {
   console.log(staff.name);
 });
 
+app.put("/api/appointment/:id", (req, res, next) => {
+  const app = new Appointment({
+    _id: req.body.id,
+    owner: req.body.owner,
+    date: req.body.date,
+    time: req.body.time,
+    package: req.body.package,
+    staffid: req.body.staffId,
+    accepted: req.body.accepted
+  });
+  Appointment.updateOne({ _id: req.params.id }, app).then(result => {
+    res.status(200).json({ message: "assign staff member successful!" });
+  });
+});
+
 app.put("/api/staff/:id", (req, res, next) => {
   const staff = new Staff({
     _id: req.body.id,
@@ -98,7 +113,9 @@ app.get("/api/appointment", (req, res, next) => {
       message: "appointments fetched successfully!",
       appointments: documents
     });
+    console.log(documents);
   });
+ 
 });
 
 
