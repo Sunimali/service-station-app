@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+/*import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
 import { map } from 'rxjs/operators';
@@ -112,4 +112,4 @@ export class VehicleAppointmentService {
         this.router.navigate(["/appointment"]);
       });
   }
-}
+}*/

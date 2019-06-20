@@ -1,12 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+/*import { Component, OnInit } from "@angular/core";
 import { VehicleAppointmentService } from "./vehicle-appointment.service";
 import { Appointment } from "./appointment.model";
 import { Subscription, from } from "rxjs";
 import { NgForm } from "@angular/forms";
 import { StaffService } from "../staff/staff.service";
 import { StaffMember } from "../staff/staffMember.model";
-import { PaymentService } from '../log/payment.service.';
-import { Payment } from '../log/payment.model.';
 
 @Component({
   selector: "app-vehicle-appointment",
@@ -16,7 +14,6 @@ import { Payment } from '../log/payment.model.';
 export class VehicleAppointmentComponent implements OnInit {
   appointments: Appointment[] = [];
   staffMembers: StaffMember[] = [];
-  availableStaff: StaffMember[] = [];
   acceptedAppointments: Appointment[] = [];
   pendingApppointments: Appointment[] = [];
   pendingSelectedAppointment: Appointment;
@@ -25,13 +22,11 @@ export class VehicleAppointmentComponent implements OnInit {
   private postsSub: Subscription;
   isViewClicked: boolean = false;
   itemClicked: number;
-  total:string;
   
   packageCharges:string;
   constructor(
     private vehicleAppointmentService: VehicleAppointmentService,
-    private staffService: StaffService,
-    private paymentService:PaymentService
+    private staffService: StaffService
   ) {}
 
   ngOnChanges(){
@@ -87,32 +82,12 @@ export class VehicleAppointmentComponent implements OnInit {
     });
     console.log(this.selectedStaff);
   }
-  staffFilter(){
-    this.acceptedAppointments.forEach(app => {
-      var id;
-      if(app.date==this.pendingSelectedAppointment.date && app.time==this.pendingSelectedAppointment.time){
-        console.log("no vacany..");
-        id = app.staffid
-      }else{
-        this.staffMembers.forEach(st => {
-           if(st.id!= id ){
-             console.log(st.name);
-            this.availableStaff.push(st);
-           }
-        });
-        
-      }
-      
-    });
-  }
   staffSelected(value){
     this.pendingSelectedAppointment.staffid = value;
   }
 
   onViewDetailForAccept(i: number) {
     this.pendingSelectedAppointment = this.pendingApppointments[i];
-    this.staffFilter();
-    console.log("ss"+this.availableStaff);
   
   }
 
@@ -128,8 +103,7 @@ export class VehicleAppointmentComponent implements OnInit {
     /*if (form.invalid) {
       return;
     }*/
-    const app: Appointment = {
-      id: this.pendingSelectedAppointment.id,
+  /*s.pendingSelectedAppointment.id,
       owner: this.pendingSelectedAppointment.owner,
       vehicle: this.pendingSelectedAppointment.vehicle,
       date: this.pendingSelectedAppointment.date,
@@ -153,16 +127,6 @@ export class VehicleAppointmentComponent implements OnInit {
     form.resetForm();
   }
 
-  onPayment(form: NgForm){
-
-    const total = +form.value.oil+form.value.packcharges+form.value.additional+form.value.airfiltering
-    console.log(total);
-    
-    this.paymentService.addPayment(form.value.packcharges,
-      form.value.oil,
-      form.value.airfiltering,form.value.additional,total,this.acceptedSelectedAppointment.id);
-  }
-
   onDelete(staffId: string) {
     this.vehicleAppointmentService.declineAppointment(staffId);
   }
@@ -178,4 +142,4 @@ export class VehicleAppointmentComponent implements OnInit {
   ngOnDestroy() {
     this.postsSub.unsubscribe();
   }
-}
+}*/

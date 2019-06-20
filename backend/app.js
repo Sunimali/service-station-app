@@ -52,6 +52,26 @@ app.post("/api/staff", (req, res, next) => {
   console.log(staff.name);
 });
 
+app.post("/api/payment", (req, res, next) => {
+  const payment = new Payment({
+
+    appid:req.body.name ,
+    packageid: req.body.name,
+    oil: req.body.name,
+    airfiltering: req.body.name,
+    additional: req.body.name,
+    total: req.body.name
+  
+  });
+  payment.save().then(createdPayment => {
+    res.status(201).json({
+      message: "payment added successfully",
+      payid: createdPayment._id
+    });
+  });
+  console.log(payment.name);
+});
+
 app.put("/api/appointment/:id", (req, res, next) => {
   const app = new Appointment({
     _id: req.body.id,

@@ -7,6 +7,7 @@ import { Appointment } from "./appointment.model";
 import { Router } from '@angular/router';
 import { StaffService } from '../staff/staff.service';
 import { Schedule } from './schedule.model';
+import { PaymentService } from '../log/payment.service.';
 
 
 @Injectable({ providedIn: "root" })
@@ -17,7 +18,7 @@ export class VehicleAppointmentService {
   private scheduleUpdated = new Subject<Schedule[]>();
   private appointmentUpdated = new Subject<Appointment[]>();
 
-  constructor(private http: HttpClient ,private router: Router,private staffService:StaffService) {}
+  constructor(private http: HttpClient ,private router: Router,private staffService:StaffService,private paymentService:PaymentService) {}
 
   getAppointments() {
     
@@ -110,6 +111,8 @@ export class VehicleAppointmentService {
         this.appointmentUpdated.next([...this.appointments]);
 
         this.router.navigate(["/appointment"]);
+        window.location.reload();
       });
   }
+
 }

@@ -25,6 +25,7 @@ import { StaffService } from './staff/staff.service';
 
 import { VehicleAppointmentComponent } from './vehicle-appointment/vehicle-appointment.component';
 import{VehicleAppointmentService}from './vehicle-appointment/vehicle-appointment.service';
+import { PaymentService } from './log/payment.service.';
 
 
 const appRoutes: Routes = [
@@ -62,6 +63,7 @@ const appRoutes: Routes = [
     StaffService,
     VehicleService,
     VehicleAppointmentService,
+    PaymentService,
     NavBar
   ],
   bootstrap: [AppComponent]

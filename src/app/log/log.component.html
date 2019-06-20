@@ -3,18 +3,17 @@
   <div class="row">
     <div class="col-lg-6 ScrollerDiv">
         <div>
-              <h3>Service Log</h3>
+              <h3>Payments Log</h3>
               <hr>
 
-              <div *ngFor="let logItem of vehicleLog; let i=index">
+              <div *ngFor="let logItem of payments; let i=index">
                   <div class="card" style="width: 18rem;" >
                       <div class="card-body">
                         <h5 class="card-title">{{logItem.vehicleNumber}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{"Last Date : "+logItem.date}}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{"Date : "+logItem.date}}</h6>
                         <ul class="list-group list-group-flush">
-                          <li class="list-group-item">{{"Amount : Rs."+logItem.totalAmount+"/="}}</li>
-                          <li class="list-group-item">{{"Pre Millage : "+logItem.preMillage+" km"}}</li>
-                          <li class="list-group-item">{{"Next Date : "+logItem.nextDate}}</li>
+                          <li class="list-group-item">{{"Amount : Rs."+logItem.total+"/="}}</li>
+                          <li class="list-group-item">{{"Packege : "+logItem.package+" km"}}</li>
                         </ul>
                         <p></p>
                         <button class="btn btn-primary" (click)="onViewDetail($event)" id={{i}}>View Detail</button>

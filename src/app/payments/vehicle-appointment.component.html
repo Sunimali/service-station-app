@@ -186,7 +186,7 @@
                     required
                     #staffid
                   >
-                    <ng-container *ngFor="let staffmem of availableStaff">
+                    <ng-container *ngFor="let staffmem of staffMembers">
                       <option
                         *ngIf="staffmem.free"
                         [value]=" staffmem?.id"
@@ -440,7 +440,7 @@
               </button>
             </div>
             <form
-              (ngSubmit)="onPayment(formElement)"
+              (ngSubmit)="onDoPayment(formElement)"
               #formElement="ngForm"
             >
               <div class="input-group mb-3 ">
@@ -514,7 +514,7 @@
                   ngModel = "{{packageCharges}}"
                   name="pckgcharges"
                   disabled
-                  #packcharges="ngModel"
+                  #pckgcharges="ngModel"
                 />
               </div>
 
@@ -530,7 +530,7 @@
                   aria-label="Username"
                   aria-describedby="basic-addon1"
                   id="total"
-                  ngModel={{packageCharges}}
+                  ngModel = "{{packageCharges}}"
                   name="total"
                   disabled
                   #total="ngModel"
